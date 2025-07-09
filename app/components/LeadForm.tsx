@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import ContactForm from "@/app/components/ContactForm";
 import { Progress } from "@/components/ui/progress"
@@ -37,10 +37,6 @@ export default function LeadForm() {
 
   // Progress bar logic
   const [progress, setProgress] = useState(25)
-  // useEffect(() => {
-  //   const timer = setTimeout(() => setProgress(66), 500)
-  //   return () => clearTimeout(timer)
-  // }, [])
 
 
   const handleBack = () => {
