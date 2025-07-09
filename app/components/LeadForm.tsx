@@ -46,7 +46,7 @@ export default function LeadForm() {
   }
 
   return (
-    <div className="w-full max-w-md mx-auto px-4 flex flex-col gap-y-8">
+    <div className="w-full max-w-md mx-auto px-4 flex flex-col gap-y-8 mb-20">
       <h2 className="text-2xl md:text-3xl font-semibold text-primary-light">{steps[step]}</h2>
 
       <Progress value={progress} className="w-full" />
