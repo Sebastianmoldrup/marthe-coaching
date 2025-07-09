@@ -19,7 +19,7 @@ export default function Footer() {
         </div>
 
         <div className="flex items-end md:justify-end">
-          <p className="text-muted-foreground">Utviklet av <span className="font-medium">Sebastian Møldrup</span></p>
+          <p className="text-muted-foreground">Utviklet av <span className="font-semibold">Sebastian Møldrup</span></p>
         </div>
 
       </div>
