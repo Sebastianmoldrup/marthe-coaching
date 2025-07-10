@@ -17,18 +17,20 @@ export default function Navigation() {
 
   return (
     <nav className="">
-      <div className="flex items-center justify-between p-4 relative z-30">
-        <h1 className="text-2xl text-primary-light z-20">Marthe Coaching</h1>
+      <div className="flex items-center justify-between p-4 relative z-40">
+        <h1 className="text-2xl z-20">Marthe Coaching</h1>
 
         {/* Desktop Nav */}
-        <ul className="hidden md:flex flex-wrap gap-4 mt-2 sm:mt-0">
+        <ul className="hidden md:flex flex-wrap gap-6 mt-2 sm:mt-0">
           {navLinks.map(({ id, label }) => (
-            <li key={id}>
+            <li key={id} className="hover:scale-125 hover:cursor-pointer transition">
               <a
                 href={`#${id}`}
-                className="text-pink-700 hover:text-pink-900 hover:scale-125 hover:cursor-pointer transition"
+                className=""
               >
-                {label}
+                <Button variant="ghost" className='hover:bg-inherit hover:cursor-pointer'>
+                  {label}
+                </Button>
               </a>
             </li>
           ))}
@@ -37,7 +39,7 @@ export default function Navigation() {
         {/* Hamburger / Close Icon */}
         <Button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden z-30 p-2 text-primary-light transition-transform hover:scale-110"
+          className="md:hidden z-40 p-2 transition-transform hover:scale-110"
           aria-label="Toggle menu"
         >
           {isOpen ? <X size={28} /> : <Menu size={28} />}
@@ -47,7 +49,7 @@ export default function Navigation() {
       {/* Mobile Menu */}
       <div
         className={clsx(
-          "fixed inset-0 z-20 bg-white flex flex-col items-center justify-center space-y-6 transform transition-all duration-500 ease-in-out",
+          "fixed inset-0 z-30 bg-white flex flex-col items-center justify-center space-y-6 transform transition-all duration-500 ease-in-out",
           isOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0 pointer-events-none"
         )}
       >
@@ -56,7 +58,7 @@ export default function Navigation() {
             key={id}
             href={`#${id}`}
             onClick={() => setIsOpen(false)}
-            className="text-pink-800 text-2xl hover:text-pink-600 transition hover:scale-125"
+            className="text-2xl transition hover:scale-125"
           >
             {label}
           </a>

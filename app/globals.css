@@ -3,28 +3,48 @@
 
 @custom-variant dark (&:is(.dark *));
 
+
+
 :root {
   /* Base colors */
 
   /* Accent palette */
-  --primary: oklch(0.205 0 0);         /* Elegant dusty purple */
-  --primary-light: #e4cde2;   /* Light lavender blush */
-  --secondary: oklch(0.97 0 0);       /* Soft rose */
-  --highlight: #ffecec;       /* Pale blush background */
-  --neutral-light: #f8f6f5;   /* Soft beige background */
-  --neutral-dark: #5a4b4b;    /* Muted brown-grey */
+  /*--primary: oklch(0.205 0 0);*/
+  /*--primary-light: #e4cde2;*/
+  /*--secondary: oklch(0.97 0 0);*/
+  /*--highlight: #ffecec;*/
+  /*--neutral-light: #f8f6f5;*/
+  /*--neutral-dark: #5a4b4b;*/
+
+  /* PALETTE */
+  --palette-background: #faeee7;
+  --palette-secondary: #ffc6c7;
+  --palette-tertiary: #c3f0ca;
+  --palette-stroke: #33272a;
+  --palette-main: #fffffe;
+  --palette-highlight: #ff8ba7;
+  --palette-button: #ff8ba7;
+  --palette-headline: #33272a;
+  --palette-button-text: #33272a;
+  --palette-paragraph: #594a4e;
+
+  --primary: var(--palette-highlight);
+  --primary-light: var(--palette-secondary);
+  --secondary: var(--palette-tertiary);
+  --highlight: var(--palette-button);
+  --neutral-light: var(--palette-main);
+  --neutral-dark: var(--palette-stroke);
 
   /* Borders & shadows */
   --border: oklch(0.922 0 0);
   --shadow: rgba(177, 133, 167, 0.25);
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --background: var(--palette-background);
+  --foreground: var(--palette-headline);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  /*--primary-foreground: oklch(0.985 0 0);*/
   --primary-foreground: oklch(0.205 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
@@ -96,15 +116,15 @@
 @media (prefers-color-scheme: dark) {
   :root {
 
-    --primary: #e4cde2;
-    --primary-light: #b185a7;
-    --secondary: #d8a0aa;
-    --highlight: #2a1e25;
-    --neutral-light: #332f2f;
-    --neutral-dark: #d8d8d8;
-
-    --border: #4a3d49;
-    --shadow: rgba(228, 205, 226, 0.2);
+    /*--primary: #e4cde2;*/
+    /*--primary-light: #b185a7;*/
+    /*--secondary: #d8a0aa;*/
+    /*--highlight: #2a1e25;*/
+    /*--neutral-light: #332f2f;*/
+    /*--neutral-dark: #d8d8d8;*/
+    /**/
+    /*--border: #4a3d49;*/
+    /*--shadow: rgba(228, 205, 226, 0.2);*/
   }
 }
 
@@ -154,3 +174,6 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+
+  

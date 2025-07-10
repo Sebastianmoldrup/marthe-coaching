@@ -1,26 +1,26 @@
 "use client";
-
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import ContactForm from "@/app/components/ContactForm";
-import { Progress } from "@/components/ui/progress"
+import { useState } from "react";
+import ContactForm from "./ContactForm";
 
-const steps = [
-  "Hva vil du ha hjelp med?",
-  "Klar for å komme i gang?",
-  "Skriv inn kontaktinformasjonen din",
-  "Omdirigerer til betalingsside",
+// 1. «Hva er ditt mål?»
+// 2. «Hva vil du oppnå?»
+// 3. «Velg din vei videre»
+// 4. «Din reise starter her – hva vil du fokusere på?»
+// 5. «Hva er viktigst for deg akkurat nå?»
+// 6. «Velg målet som passer deg best»
+// 7. «Skreddersy din livsstilsendring – hvor vil du begynne?»
+// 8. «Start med det som betyr mest for deg»
+// 9. «Hva ønsker du å forbedre i livet ditt?»
+const headers = [
+  "Velg din vei videre",
+  "Er du klar for å ta neste steg?"
 ];
 
 const goals = [
-  "Gå ned i vekt og føle meg bedre",
-  "Bygge styrke og bli sterkere i hverdagen",
-  "Skape en sunn og balansert livsstil",
-];
-
-const callToAction = [
-  "Jeg vil lære mer først",
-  "La oss starte reisen min!"
+  "Ned i vekt",
+  "Bygge styrke",
+  "Sunnere livsstil",
 ];
 
 export default function LeadForm() {
@@ -31,113 +31,46 @@ export default function LeadForm() {
     email: "",
     phone: "",
   });
-  // console.log(step);
-  console.log(selectedGoal);
-  console.log(formData);
-
-  // Progress bar logic
-  const [progress, setProgress] = useState(25)
 
 
-  const handleBack = () => {
-    if (step === 0) return; // Avoid going back from the first step
-    else if (step === 3) setStep(1); // Bug fix: skip back from payment step
-    else setStep(step - 1);
-  }
+
 
   return (
-    <div className="w-full max-w-md mx-auto px-4 flex flex-col gap-y-8 z-10">
-      <h2 className="text-2xl md:text-3xl font-semibold text-white">{steps[step]}</h2>
+    <div className="bg-white p-6 shadow-xl rounded-md space-y-6 w-[350px] md:w-[480px]">
+      <h2 className="text-2xl">{headers[step]}</h2>
 
-      <Progress value={progress} className="w-full" />
+      {
+        step === 0 && (
+          <StepContent content={goals} step={step} setStep={setStep} />
+        )
+      }
 
-      {step === 0 && (
-        <Goals setSelectedGoal={setSelectedGoal} setStep={setStep} setProgress={setProgress} />
-      )}
-
-      {step === 1 && (
-        <CallToAction setStep={setStep} setProgress={setProgress} />
-      )}
-
-      {step === 2 && (
-        <ContactForm setFormDataAction={setFormData} />
-      )}
-
-      {step === 3 && (
-        <span>
-          Kunden ønsker å ({selectedGoal})
-        </span>
-      )}
-
-      <Button
-        onClick={() => handleBack()}
-        variant={step === 0 ? "outline" : "default"}
-        className="text-sm font-medium transition disabled:opacity-30 disabled:cursor-not-allowed hover:cursor-pointer"
-      >
-        ← Tilbake
-      </Button>
+      {
+        step === 1 && (
+          <ContactForm setFormDataAction={setFormData} step={step} setStepAction={setStep} />
+        )
+      }
     </div>
   );
 }
 
-{/*
-  Goals props and component
-*/}
-
-type GoalsContentProps = {
-  setSelectedGoal: React.Dispatch<React.SetStateAction<string>>;
+type StepProps = {
+  content: string[];
+  step: number;
   setStep: React.Dispatch<React.SetStateAction<number>>;
-  setProgress: React.Dispatch<React.SetStateAction<number>>;
 }
 
-function Goals({ setSelectedGoal, setStep, setProgress }: GoalsContentProps) {
+function StepContent({ content, step, setStep }: StepProps) {
   return (
-    <div className="flex flex-col gap-y-4">
-      {goals.map((goal: string, index: number) => {
-        return (
-          <Button key={index} className="hover:cursor-pointer hover:shadow-md" onClick={() => {
-            setSelectedGoal(goal);
-            setStep(1);
-            setProgress(50); // Update progress to 50% when a goal is selected
-
-          }}>{goal}</Button>
-        );
-      })}
+    <div className="w-full space-y-4">
+      <div className="flex flex-col gap-y-4">
+        {content.map((item, index) => {
+          return (
+            <Button key={index} className="" onClick={() => setStep(step + 1)}>{item}</Button>
+          );
+        })}
+      </div>
+      {step === 0 ? null : <Button className="" onClick={() => setStep(step - 1)}>Tilbake</Button>}
     </div>
   );
 }
-
-{/*
-  CallToAction props and component
-*/}
-
-type CallToActionProps = {
-  setStep: React.Dispatch<React.SetStateAction<number>>;
-  setProgress: React.Dispatch<React.SetStateAction<number>>;
-}
-
-
-function CallToAction({ setStep, setProgress }: CallToActionProps) {
-  return (
-    <div className="flex flex-col gap-y-4">
-      {callToAction.map((action: string, index: number) => {
-        return (
-          <Button
-            key={index}
-            className="hover:cursor-pointer hover:shadow-md"
-            onClick={() => {
-              if (index === 0) setProgress(75);
-              setStep(2 + index); // Step 2 for form, 3 for payment
-            }}
-          >
-            {action}
-          </Button>
-        );
-      })}
-    </div>
-  );
-}
-
-
-
-

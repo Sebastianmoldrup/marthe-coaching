@@ -17,9 +17,11 @@ import { Input } from "@/components/ui/input"
 
 type ContactFormProps = {
   setFormDataAction: React.Dispatch<React.SetStateAction<{ name: string; email: string; phone: string }>>;
+  step: number;
+  setStepAction: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export default function ContactForm({ setFormDataAction }: ContactFormProps) {
+export default function ContactForm({ setFormDataAction, step, setStepAction }: ContactFormProps) {
 
   const formSchema = z.object({
     name: z.string().min(2, {
@@ -49,13 +51,13 @@ export default function ContactForm({ setFormDataAction }: ContactFormProps) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6">
         <FormField
           control={form.control}
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Ditt fulle navn</FormLabel>
+              <FormLabel>Navn & Etternavn</FormLabel>
               <FormControl>
                 <Input placeholder="Marthe coaching" {...field} />
               </FormControl>
@@ -91,7 +93,10 @@ export default function ContactForm({ setFormDataAction }: ContactFormProps) {
             </FormItem>
           )}
         />
-        <Button type="submit">Bekreft og registrer deg</Button>
+        <div className="flex justify-between">
+          <Button onClick={() => setStepAction(step - 1)}>Tilbake</Button>
+          <Button type="submit">Bekreft og registrer deg</Button>
+        </div>
       </form>
     </Form>
   )
